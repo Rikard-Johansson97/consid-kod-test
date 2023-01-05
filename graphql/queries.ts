@@ -12,6 +12,7 @@ const GET_ALL_POSTS = gql`
 const GET_ALL_PRODUCTS = gql`
 query allProducts {
   allProducts {
+    _createdAt
     name
     price
     id

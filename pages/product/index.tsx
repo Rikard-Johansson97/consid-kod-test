@@ -1,7 +1,9 @@
+import Navbar from "../../components/Navbar";
+
 export default function Product() {
   return (
-    <>
-      A list of all our products
-    </>
-  )
+    <div>
+      <Navbar></Navbar>
+    </div>
+  );
 }

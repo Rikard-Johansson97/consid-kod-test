@@ -3,7 +3,6 @@ import { useState } from "react";
 import styles from "./navbar.module.scss";
 import IconButton from "@mui/material/IconButton";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
-import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Navbar = () => {
@@ -25,7 +24,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href='/products' className={styles.link}>
+            <Link href='/product' className={styles.link}>
               Products
             </Link>
           </li>
@@ -48,7 +47,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link href='/products' className={styles.link}>
+          <Link href='/product' className={styles.link}>
             Products
           </Link>
         </li>
