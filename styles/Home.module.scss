@@ -7,6 +7,14 @@
   min-height: 100vh;
 }
 
+$hej: blue;
+
+.test{
+  background-color: $hej;
+  &:hover{
+    
+  }
+}
 .description {
   display: inherit;
   justify-content: inherit;
