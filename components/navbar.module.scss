@@ -1,0 +1,57 @@
+@import "/styles/globals.scss";
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  background-color: $grey;
+  padding: 0 20px;
+
+  .links {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+    .link {
+      color: $white;
+      font-size: 20px;
+      &:hover {
+        border-bottom: solid 2px #ffffff;
+        transition: all 1s ease-in-out;
+      }
+    }
+  }
+
+  .btnIcon {
+    color: $white;
+  }
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  background-color: $dark-grey;
+  height: 100%;
+  transition: left 0.5s ease-in-out;
+
+  .btnIcon {
+    margin: 12px 20px;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+    .link {
+      font-size: 20px;
+      color: $white;
+    }
+  }
+  &.active {
+    left: 0;
+    transition: left 0.5s ease-in-out;
+  }
+}
