@@ -10,17 +10,30 @@ import {
 } from "../graphql/queries";
 // Components
 import Navbar from "../components/Navbar";
+import NewProducts from "../components/NewProducts";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { loading, error, data: post } = useQuery(GET_ALL_POSTS);
-  const { data: products } = useQuery(GET_ALL_PRODUCTS);
-  const { data: homePage } = useQuery(GET_HOME_PAGE);
+  const {
+    loading: postLoading,
+    error: postError,
+    data: post,
+  } = useQuery(GET_ALL_POSTS);
+  const {
+    loading: productsLoading,
+    error: productsError,
+    data: products,
+  } = useQuery(GET_ALL_PRODUCTS);
+  const {
+    loading: homePageLoading,
+    error: homePageError,
+    data: homePage,
+  } = useQuery(GET_HOME_PAGE);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
-  console.log(homePage);
+  if (postLoading || productsLoading || homePageLoading)
+    return <p>Loading...</p>;
+  if (postError || productsError || homePageError) return <p>Error : Error</p>;
 
   return (
     <>
@@ -33,6 +46,7 @@ export default function Home() {
       <div>
         <Navbar></Navbar>
         <Banner {...homePage}></Banner>
+        <NewProducts {...products}></NewProducts>
       </div>
     </>
   );
