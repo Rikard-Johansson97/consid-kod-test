@@ -1,0 +1,48 @@
+@import "/src/styles/globals.scss";
+.card {
+  background-color: $white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 300ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .cardImg {
+    .newRelease {
+      position: absolute;
+      color: #dc0532;
+      transform: translate(-20%, -20%);
+    }
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .cardText {
+    margin: 20px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    p {
+      color: #b1aaaa;
+      font-size: 12px;
+      text-align: start;
+    }
+
+    .cardPrice {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      border-top: 1px solid $light-grey;
+      padding: 10px 0;
+      p {
+        color: $black;
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
