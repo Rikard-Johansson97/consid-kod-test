@@ -1,0 +1,36 @@
+@import "/src/styles/globals.scss";
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 20px;
+  width: 100vw;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  position: absolute;
+  .links {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+    .link {
+      color: $white;
+      font-size: 20px;
+      &:hover {
+        border-bottom: solid 2px #ffffff;
+        transition: all 1s ease-in-out;
+      }
+    }
+  }
+
+  .btnIcon {
+    color: $white;
+  }
+}

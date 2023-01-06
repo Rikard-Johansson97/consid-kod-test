@@ -1,5 +1,5 @@
-import "../styles/globals.scss";
-import "../styles/utilities/reset.css";
+import "../src/styles/globals.scss";
+import "../src/styles/utilities/reset.css";
 import type { AppProps } from "next/app";
 import { setContext } from "@apollo/client/link/context";
 import {
