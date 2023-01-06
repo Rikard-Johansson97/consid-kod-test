@@ -1,0 +1,48 @@
+@import "/src/styles/globals.scss";
+
+.overlay {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 200vh;
+  opacity: 0;
+  z-index: 7;
+  transition: all 0.5s ease-in-out;
+}
+.overlay.active {
+  visibility: visible;
+  background-color: black;
+  opacity: 0.6;
+}
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  background-color: $dark-grey;
+  height: 110vh;
+  transition: left 0.5s ease-in-out;
+  background-color: $dark-grey;
+  z-index: 9;
+  border-right: solid 2px white;
+  .btnIcon {
+    margin: 12px 20px;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: $dark-grey;
+    .link {
+      font-size: 20px;
+      color: $white;
+    }
+  }
+  &.active {
+    left: 0;
+    transition: left 0.5s ease-in-out;
+  }
+}
