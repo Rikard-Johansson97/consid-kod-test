@@ -1,16 +1,17 @@
-import Banner from "../components/Banner";
+import Banner from "../src/components/Banner/Banner";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.scss";
+import styles from "../src/styles/Home.module.scss";
 import { useQuery, gql } from "@apollo/client";
 import {
   GET_ALL_POSTS,
   GET_ALL_PRODUCTS,
   GET_HOME_PAGE,
-} from "../graphql/queries";
+} from "../src/graphql/queries";
 // Components
-import Navbar from "../components/Navbar";
-import NewProducts from "../components/NewProducts";
+import Navbar from "../src/components/Navbar/Navbar";
+import NewProducts from "../src/components/NewProducts/NewProducts";
+import Footer from "../src/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,8 @@ export default function Home() {
     return <p>Loading...</p>;
   if (postError || productsError || homePageError) return <p>Error : Error</p>;
 
+  console.log(post);
+
   return (
     <>
       <Head>
@@ -45,8 +48,9 @@ export default function Home() {
       </Head>
       <div>
         <Navbar></Navbar>
-        <Banner {...homePage}></Banner>
-        <NewProducts {...products}></NewProducts>
+        <Banner {...homePage} />
+        <NewProducts {...products} />
+        <Footer />
       </div>
     </>
   );
