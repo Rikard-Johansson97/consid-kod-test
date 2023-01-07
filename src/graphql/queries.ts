@@ -1,10 +1,15 @@
 import { gql } from '@apollo/client';
 
+
 const GET_ALL_POSTS = gql`
   query GetAllPosts {
     allPages {
-      id
       title
+      slug
+      mainImage {
+        url
+      }
+      id
     }
   }
 `;
@@ -37,4 +42,4 @@ query getHomePage {
 
 `
 
-export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE}
+export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE};

@@ -7,6 +7,13 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <style tsx global>{`
+          /* Other global styles such as 'html, body' etc... */
+
+          html {
+            background-color: #e4e5f1;
+          }
+        `}</style>
       </body>
     </Html>
   );

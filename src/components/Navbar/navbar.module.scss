@@ -6,13 +6,8 @@
   height: 64px;
   padding: 0 20px;
   width: 100vw;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
   position: absolute;
+  z-index: 5;
   .links {
     @media screen and (max-width: 768px) {
       display: none;
@@ -21,7 +16,7 @@
     justify-content: space-evenly;
     flex: 1;
     .link {
-      color: $white;
+      color: white;
       font-size: 20px;
       &:hover {
         border-bottom: solid 2px #ffffff;
@@ -31,6 +26,6 @@
   }
 
   .btnIcon {
-    color: $white;
+    color: white;
   }
 }

@@ -4,6 +4,7 @@ import styles from "./navbar.module.scss";
 import IconButton from "@mui/material/IconButton";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Sidebar from "../Sidebar/Sidebar";
 
 const Navbar = () => {
@@ -27,9 +28,14 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      <IconButton className={styles.btnIcon}>
-        <ShoppingCartOutlinedIcon />
-      </IconButton>
+      <div className={styles.cart}>
+        <IconButton className={styles.btnIcon}>
+          <FavoriteBorderIcon />
+        </IconButton>
+        <IconButton className={styles.btnIcon}>
+          <ShoppingCartOutlinedIcon />
+        </IconButton>
+      </div>
     </nav>
   );
 };

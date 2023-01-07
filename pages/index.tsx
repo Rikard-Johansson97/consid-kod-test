@@ -1,7 +1,6 @@
 import Banner from "../src/components/Banner/Banner";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import styles from "../src/styles/Home.module.scss";
 import { useQuery, gql } from "@apollo/client";
 import {
   GET_ALL_POSTS,
@@ -36,8 +35,6 @@ export default function Home() {
     return <p>Loading...</p>;
   if (postError || productsError || homePageError) return <p>Error : Error</p>;
 
-  console.log(post);
-
   return (
     <>
       <Head>
@@ -48,7 +45,7 @@ export default function Home() {
       </Head>
       <div>
         <Navbar></Navbar>
-        <Banner {...homePage} />
+        <Banner data={homePage.startpage} />
         <NewProducts {...products} />
         <Footer />
       </div>
