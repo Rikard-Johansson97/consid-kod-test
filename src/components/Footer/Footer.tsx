@@ -30,7 +30,9 @@ const Footer = () => (
         </Link>
       </IconButton>
     </nav>
-    <p className={styles.copyright}>Copyright 2023. All rights reserved.</p>
+    <p className={styles.copyright}>
+      Copyright {new Date().getFullYear()}. All rights reserved.
+    </p>
   </footer>
 );
 

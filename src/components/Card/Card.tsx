@@ -8,9 +8,16 @@ import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import Link from "next/link";
 
 const Card = (props: any) => {
-  console.log(props);
   return (
-    <Link href={`/product/${props.id}`} className={styles.card}>
+    <Link
+      href={{
+        pathname: `/product/${props.id}`,
+        query: {
+          data: props,
+        },
+      }}
+      as={`/product/${props.id}`}
+      className={styles.card}>
       <div className={styles.cardImg}>
         {props.new && (
           <NewReleasesIcon fontSize='large' className={styles.newRelease} />
