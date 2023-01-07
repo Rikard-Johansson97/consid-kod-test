@@ -17,6 +17,7 @@
     }
     img {
       width: 100%;
+      min-height: 250px;
       object-fit: cover;
     }
   }
@@ -31,7 +32,9 @@
       font-size: 12px;
       text-align: start;
     }
-
+    h4 {
+      color: $black;
+    }
     .cardPrice {
       display: flex;
       justify-content: space-between;
