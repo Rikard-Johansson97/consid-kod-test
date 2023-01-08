@@ -1,0 +1,42 @@
+@import "/src/styles/globals.scss";
+
+.menuItem {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  border-top: solid 1px $light-grey;
+  padding-top: 10px;
+  .img {
+    flex: 2;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+    }
+  }
+  .productInfo {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .productName {
+      display: flex;
+      justify-content: space-between;
+      h4 {
+        font-size: 1.5rem;
+      }
+    }
+    .buyInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $white;
+
+      p {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
