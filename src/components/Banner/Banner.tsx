@@ -3,8 +3,16 @@ import React from "react";
 import styles from "./banner.module.scss";
 import Button from "@mui/material/Button";
 import Link from "next/link";
+interface Props {
+  data: {
+    mainImage: {
+      url: string;
+    };
+    title: string;
+  };
+}
 
-const Banner = (props: any) => {
+const Banner = (props: Props) => {
   const data = props.data;
   return (
     <div className={styles.banner}>

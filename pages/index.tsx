@@ -1,7 +1,7 @@
 import Banner from "../src/components/Banner/Banner";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {
   GET_ALL_POSTS,
   GET_ALL_PRODUCTS,
@@ -11,8 +11,6 @@ import {
 import Navbar from "../src/components/Navbar/Navbar";
 import NewProducts from "../src/components/NewProducts/NewProducts";
 import Footer from "../src/components/Footer/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const {
