@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "./card.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -6,24 +5,30 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import IconButton from "@mui/material/IconButton";
 import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import Link from "next/link";
-
-const Card = (props: any) => {
+import useAddToCart from "../../hooks/addToCart";
+import useAddToFavorites from "../../hooks/addToFavorites";
+interface Props {
+  id: string;
+  mainImage: {
+    url: string;
+  };
+  name: string;
+  new: boolean;
+  price: number;
+}
+const Card = (props: Props) => {
+  const addToCart = useAddToCart();
+  const addToFavorites = useAddToFavorites();
   return (
-    <Link
-      href={{
-        pathname: `/product/${props.id}`,
-        query: {
-          data: props,
-        },
-      }}
-      as={`/product/${props.id}`}
-      className={styles.card}>
-      <div className={styles.cardImg}>
-        {props.new && (
-          <NewReleasesIcon fontSize='large' className={styles.newRelease} />
-        )}
-        <img src={props.mainImage.url} alt={props.name} />
-      </div>
+    <div className={styles.card}>
+      <Link href={`/product/${props.id}`}>
+        <div className={styles.cardImg}>
+          {props.new && (
+            <NewReleasesIcon fontSize='large' className={styles.newRelease} />
+          )}
+          <img src={props.mainImage.url} alt={props.name} />
+        </div>
+      </Link>
       <div className={styles.cardText}>
         <p>{props.name}</p>
         <h4>{props.name}</h4>
@@ -33,17 +38,23 @@ const Card = (props: any) => {
         </p>
         <div className={styles.cardPrice}>
           <p>{props.price} kr</p>
-          <div className='cardIcons'>
-            <IconButton>
+          <div className={styles.btn}>
+            <IconButton
+              onClick={() => {
+                addToFavorites(props, 1);
+              }}>
               <FavoriteBorderIcon />
             </IconButton>
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                addToCart(props, 1);
+              }}>
               <ShoppingCartOutlinedIcon />
             </IconButton>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

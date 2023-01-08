@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../Card/Card";
 import styles from "./newProducts.module.scss";
+import CardWrapper from "../CardWrapper/CardWrapper";
 
 const NewProducts = (props: any) => {
   const sortedProducts = props.allProducts.slice().sort((a: any, b: any) => {
@@ -16,7 +17,7 @@ const NewProducts = (props: any) => {
   });
 
   return (
-    <div className={styles.wrapper}>
+    <CardWrapper>
       <div className={styles.newProducts}>
         <h3>NEW</h3>
         <div className={styles.cards}>
@@ -25,7 +26,7 @@ const NewProducts = (props: any) => {
           ))}
         </div>
       </div>
-    </div>
+    </CardWrapper>
   );
 };
 
