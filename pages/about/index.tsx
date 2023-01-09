@@ -16,7 +16,7 @@ const About = () => {
   return (
     <div>
       <Navbar />
-      <Banner data={data.allPages[0]} />
+      <Banner {...data.allPages[0]} />
       <CardWrapper>
         <div className='about'>
           <h1>About Consid</h1>

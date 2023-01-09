@@ -1,32 +1,15 @@
 import { useRouter } from "next/router";
 import Navbar from "../../src/components/Navbar/Navbar";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import ProductPage from "../../src/components/ProductPage/SingleProduct/Product";
 import Footer from "../../src/components/Footer/Footer";
+import { GET_PRODUCT } from "../../src/graphql/queries";
 
 const Product = () => {
   const router = useRouter();
   const id = router.query.productId;
 
-  const GET_PRODUCT = gql`
-  query GetProduct {
-    product(filter: {id: {eq: ${id}}}) {
-      price
-      name
-      mainImage {
-        alt
-        url
-      }
-      id
-      alternativeImages {
-        url
-        alt
-      }
-    }
-  }
-`;
-
-  const { loading, error, data } = useQuery(GET_PRODUCT);
+  const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

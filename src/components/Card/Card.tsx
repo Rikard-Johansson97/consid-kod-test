@@ -7,16 +7,8 @@ import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import Link from "next/link";
 import useAddToCart from "../../hooks/addToCart";
 import useAddToFavorites from "../../hooks/addToFavorites";
-interface Props {
-  id: string;
-  mainImage: {
-    url: string;
-  };
-  name: string;
-  new: boolean;
-  price: number;
-}
-const Card = (props: Props) => {
+
+const Card = (props: any) => {
   const addToCart = useAddToCart();
   const addToFavorites = useAddToFavorites();
   return (

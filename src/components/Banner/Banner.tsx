@@ -1,24 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
+import { Image } from "react-datocms";
 import React from "react";
 import styles from "./banner.module.scss";
-import Button from "@mui/material/Button";
-import Link from "next/link";
-interface Props {
-  data: {
-    mainImage: {
-      url: string;
-    };
-    title: string;
-  };
-}
 
-const Banner = (props: Props) => {
-  const data = props.data;
+const Banner = (props: any) => {
+  console.log(props);
   return (
     <div className={styles.banner}>
-      <img src={data.mainImage.url} alt={data.mainImage.url} />
+      <Image data={props.mainImage.responsiveImage} />
       <div className={styles.text}>
-        <h1>{data.title}</h1>
+        <h1>{props.title}</h1>
       </div>
     </div>
   );
