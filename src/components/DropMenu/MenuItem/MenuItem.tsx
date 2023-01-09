@@ -8,7 +8,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import useQuantityAndTotalPrice from "../../../hooks/useQuantityAndTotalPrice";
 import useRemoveFromCart from "../../../hooks/removeFromCart";
 const MenuItem = (props: any) => {
-  console.log(props);
   const { quantity, totalPrice, increment, decrement } =
     useQuantityAndTotalPrice(props, props.quantity, props.price);
   const removeFromCart = useRemoveFromCart();

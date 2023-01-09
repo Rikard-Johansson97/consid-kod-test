@@ -2,29 +2,36 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../src/components/Navbar/Navbar";
 import Footer from "../../src/components/Footer/Footer";
-import MenuItem from "../../src/components/DropMenu/MenuItem/MenuItem";
-import CardWrapper from "../../src/components/CardWrapper/CardWrapper";
-import styles from "./checkout.module.scss";
-import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
+import KlarnaPage from "../../src/components/KlarnaPage/KlarnaPage";
+
 const Checkout = () => {
   const cart = useSelector((state: any) => state.cart);
-  console.log(cart);
+  const [response, setResponse] = useState<any>(null);
+
+  const placeOrder = async (cart: any) => {
+    const res = await fetch("/api/klarna", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart }),
+    });
+    const data = await res.json();
+    setResponse(data);
+  };
+
+  useEffect(() => {
+    placeOrder(cart);
+  }, [cart]);
+
+  if (!response) return <h2>LOADING...</h2>;
 
   return (
     <div>
       <Navbar />
-      <div style={{ paddingTop: "80px" }}>
-        <CardWrapper>
-          <h2>Checkout</h2>
-          <div className={styles.checkout}>
-            {cart.map((product: any, index: any) => (
-              <MenuItem key={index} {...product} />
-            ))}
-          </div>
-          <Button size='large'>Place Order</Button>
-        </CardWrapper>
-        <Footer />
-      </div>
+      <KlarnaPage snippet={response.html_snippet} />
+      <Footer />
     </div>
   );
 };

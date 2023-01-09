@@ -1,23 +1,13 @@
 import Banner from "../src/components/Banner/Banner";
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import { useQuery } from "@apollo/client";
-import {
-  GET_ALL_POSTS,
-  GET_ALL_PRODUCTS,
-  GET_HOME_PAGE,
-} from "../src/graphql/queries";
-// Components
+import { GET_ALL_PRODUCTS, GET_HOME_PAGE } from "../src/graphql/queries";
 import Navbar from "../src/components/Navbar/Navbar";
 import NewProducts from "../src/components/NewProducts/NewProducts";
 import Footer from "../src/components/Footer/Footer";
+import { StructuredText } from "react-datocms";
 
 export default function Home() {
-  const {
-    loading: postLoading,
-    error: postError,
-    data: post,
-  } = useQuery(GET_ALL_POSTS);
   const {
     loading: productsLoading,
     error: productsError,
@@ -29,9 +19,8 @@ export default function Home() {
     data: homePage,
   } = useQuery(GET_HOME_PAGE);
 
-  if (postLoading || productsLoading || homePageLoading)
-    return <p>Loading...</p>;
-  if (postError || productsError || homePageError) return <p>Error : Error</p>;
+  if (productsLoading || homePageLoading) return <p>Loading...</p>;
+  if (productsError || homePageError) return <p>Error : Error</p>;
 
   return (
     <>
@@ -43,8 +32,9 @@ export default function Home() {
       </Head>
       <div>
         <Navbar></Navbar>
-        <Banner data={homePage.startpage} />
+        <Banner {...homePage.startpage} />
         <NewProducts {...products} />
+        <StructuredText data={homePage.startpage.content.value} />
         <Footer />
       </div>
     </>

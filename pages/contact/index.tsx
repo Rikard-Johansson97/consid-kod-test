@@ -14,7 +14,7 @@ const Contact = () => {
   return (
     <div>
       <Navbar />
-      <Banner data={data.allPages[1]} />
+      <Banner {...data.allPages[1]} />
       <CardWrapper>
         <form>
           <label htmlFor='name'>Name:</label>
