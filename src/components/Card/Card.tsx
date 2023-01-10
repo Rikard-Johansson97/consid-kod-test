@@ -11,7 +11,8 @@ import { useQuery } from "@apollo/client";
 import { Product } from "../../types/types";
 import { GET_PRODUCT } from "../../graphql/queries";
 
-const Card = ({ id }: any) => {
+const Card = ({ id }: Product) => {
+
   const addToCart = useAddToCart();
   const addToFavorites = useAddToFavorites();
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });

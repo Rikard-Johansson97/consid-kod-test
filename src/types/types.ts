@@ -1,5 +1,6 @@
 // RESPONSIVE IMAGE
-export interface ResponsiveImage {
+
+interface ResponsiveImage {
   width: number;
   webpSrcSet: string;
   title: any;

@@ -10,6 +10,7 @@ type Props = {
 
 const NewProducts = ({ ids }: Props) => {
   console.log("ids", ids);
+
   return (
     <CardWrapper>
       <div className={styles.newProducts}>

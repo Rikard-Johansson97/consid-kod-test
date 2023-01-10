@@ -10,7 +10,9 @@ import useRemoveFromCart from "../../../hooks/removeFromCart";
 import { Product } from "../../../types/types";
 import { Image } from "react-datocms";
 
-const MenuItem = (props: any) => {
+
+const MenuItem = (props: Product) => {
+
   const { mainImage, name, keyValue, price } = props;
   const { quantity, totalPrice, increment, decrement } =
     useQuantityAndTotalPrice(props, props.quantity, price);

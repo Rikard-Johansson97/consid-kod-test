@@ -156,3 +156,4 @@ query GetProduct ($id: ItemId!) {
 `
 // Export the defined queries
 export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE, GET_FEATURED_PRODUCT_IDS};
+
