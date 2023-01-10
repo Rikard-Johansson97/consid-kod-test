@@ -76,6 +76,13 @@ query allProducts {
   }
 }`
 
+const GET_FEATURED_PRODUCT_IDS = gql`
+query allProducts {
+  allProducts(first: 3) {
+    id
+  }
+}`
+
 // Define a GraphQL query to retrieve the home page
 const GET_HOME_PAGE = gql`
 query getHomePage {
@@ -83,13 +90,9 @@ query getHomePage {
     title
     id
     content {
-      blocks
-      links
       value
     }
     mainImage {
-      url
-      alt
       responsiveImage {
         width
         webpSrcSet
@@ -103,7 +106,6 @@ query getHomePage {
         aspectRatio
         alt
       }
-      copyright
     }
   }
 }
@@ -153,4 +155,4 @@ query GetProduct ($id: ItemId!) {
 }
 `
 // Export the defined queries
-export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE};
+export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE, GET_FEATURED_PRODUCT_IDS};
