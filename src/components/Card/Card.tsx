@@ -12,6 +12,7 @@ import { Product } from "../../types/types";
 import { GET_PRODUCT } from "../../graphql/queries";
 
 const Card = ({ id }: Product) => {
+
   const addToCart = useAddToCart();
   const addToFavorites = useAddToFavorites();
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
@@ -19,7 +20,7 @@ const Card = ({ id }: Product) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const product = data.product;
+  const { product } = data;
 
   return (
     <div className={styles.card}>

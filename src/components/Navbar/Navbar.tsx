@@ -26,6 +26,19 @@ const Navbar = () => {
   };
   const wishListData = { title: "Wishlist", btn: "", keyValue: "favorites" };
 
+  const links = [
+    {
+      id: 1,
+      title: "Home",
+      url: "/",
+    },
+    {
+      id: 2,
+      title: "Products",
+      url: "/product",
+    },
+  ];
+
   return (
     <nav className={styles.nav}>
       <IconButton onClick={() => setIsOpen(!isOpen)}>
@@ -33,16 +46,15 @@ const Navbar = () => {
       </IconButton>
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <ul className={styles.links}>
-        <li>
-          <Link className={styles.link} href='/'>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href='/product' className={styles.link}>
-            Products
-          </Link>
-        </li>
+        {links.map((link) => {
+          return (
+            <li key={link.id}>
+              <Link className={styles.link} href={link.url}>
+                {link.title}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
       <div className={styles.cart}>
         <IconButton

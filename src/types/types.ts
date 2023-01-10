@@ -1,4 +1,5 @@
 // RESPONSIVE IMAGE
+
 interface ResponsiveImage {
   width: number;
   webpSrcSet: string;

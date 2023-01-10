@@ -13,6 +13,13 @@ const Sidebar = (props: any) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const links = [
+    { name: "Home", href: "/" },
+    { name: "Products", href: "/product" },
+    { name: "About", href: "/about" },
+    { name: "Contact us", href: "/contact" },
+  ];
+
   return (
     <>
       {
@@ -25,26 +32,13 @@ const Sidebar = (props: any) => {
           <DensityMediumOutlinedIcon className={styles.btnIcon} />
         </IconButton>
         <ul className={styles.links}>
-          <li>
-            <Link className={styles.link} href='/'>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href='/product' className={styles.link}>
-              Products
-            </Link>
-          </li>
-          <li>
-            <Link href='/about' className={styles.link}>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href='/contact' className={styles.link}>
-              Contact us
-            </Link>
-          </li>
+          {links.map((link) => (
+            <li key={link.name}>
+              <Link href={link.href} className={styles.link}>
+                {link.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </>
