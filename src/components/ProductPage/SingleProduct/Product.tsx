@@ -25,8 +25,8 @@ const ProductPage = ({ product }: Product) => {
           {product.alternativeImages.map((img: any, i: any) => (
             <div key={i} className={styles.alternative}>
               <Image
-                data={img.responsiveImage}
-                className={styles.altImg}></Image>
+                className={styles.altImg}
+                data={img.responsiveImage}></Image>
             </div>
           ))}
         </div>
