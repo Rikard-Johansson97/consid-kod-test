@@ -1,14 +1,21 @@
 import { Image } from "react-datocms";
 import React from "react";
 import styles from "./banner.module.scss";
+import { ResponsiveImageType } from "react-datocms"; // NOTE: Finns nog types att använda för DatoCMS härifrån, googla på React datocms types
 
-const Banner = (props: any) => {
-  console.log(props);
+type Props = {
+  mainImage: {
+    responsiveImage: ResponsiveImageType;
+  };
+  title: string;
+};
+
+const Banner = ({ mainImage, title }: Props) => {
   return (
     <div className={styles.banner}>
-      <Image data={props.mainImage.responsiveImage} />
+      <Image data={mainImage.responsiveImage} />
       <div className={styles.text}>
-        <h1>{props.title}</h1>
+        <h1>{title}</h1>
       </div>
     </div>
   );
