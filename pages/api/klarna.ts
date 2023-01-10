@@ -1,5 +1,20 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {
+  switch (req.method) {
+    case "POST":
+      await createOrder(req, res);
+      break;
+    case "GET":
+      console.log(req.query)
+      await retrieveOrder(req , res, req.query.order_id);
+      break;  
+    default:
+      res.status(500).send("WRONG METHOD");
+      break;
+  }
+}
+
 const getKlarnaAuth = () => {
   const username = process.env.NEXT_PUBLIC_PUBLIC_KEY;
   const password = process.env.NEXT_PUBLIC_SECRET_KEY;
@@ -34,9 +49,8 @@ function formatProduct(product : any) {
 }
 
 const createOrder = async (req : any,res : any) => {
-  
-  
-  if (req.method !== "POST") return res.status(404); 
+  try {
+    if (req.method !== "POST") return res.status(404); 
   const cart = req.body.cart;
   
 	const formattedProduct = cart.map(formatProduct);
@@ -67,7 +81,7 @@ const createOrder = async (req : any,res : any) => {
     merchant_urls: {
       terms: "https://www.example.com/terms.html",
       checkout: "https://www.example.com/checkout.html",
-      confirmation: `${process.env.NEXT_PUBLIC_REDIRECT_URL}/checkout//confirmation?order_id={checkout.order.id}`,
+      confirmation: `${process.env.NEXT_PUBLIC_REDIRECT_URL}/confirmation?order_id={checkout.order.id}`,
       push: "https://www.example.com/api/push",
     },
   };
@@ -81,6 +95,10 @@ const createOrder = async (req : any,res : any) => {
   const data = await response.json();
 
   res.status(200).json(data);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
 }
 
 const retrieveOrder = async (req: any, res: any, order_id: any) => {
@@ -94,7 +112,6 @@ const retrieveOrder = async (req: any, res: any, order_id: any) => {
     };
 
     const response = await fetch(url, { headers });
-
     const data = await response.json();
 
     res.status(200).json(data);
@@ -103,17 +120,5 @@ const retrieveOrder = async (req: any, res: any, order_id: any) => {
   }
 };
 
-export default async function handler(req : NextApiRequest, res : NextApiResponse) {
-  switch (req.method) {
-    case "POST":
-      await createOrder(req, res);
-      break;
-    case "GET":
-      console.log(req.query)
-      await retrieveOrder(req , res, req.query.order_id);
-      break;  
-    default:
-      break;
-  }
-}
+
 

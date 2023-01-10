@@ -3,43 +3,50 @@ import styles from "./card.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import IconButton from "@mui/material/IconButton";
-import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import Link from "next/link";
 import useAddToCart from "../../hooks/addToCart";
 import useAddToFavorites from "../../hooks/addToFavorites";
+import { Image } from "react-datocms";
+import { useQuery } from "@apollo/client";
+import { Product } from "../../types/types";
+import { GET_PRODUCT } from "../../graphql/queries";
 
-const Card = (props: any) => {
+const Card = ({ id }: Product) => {
   const addToCart = useAddToCart();
   const addToFavorites = useAddToFavorites();
+  const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const product = data.product;
+
   return (
     <div className={styles.card}>
-      <Link href={`/product/${props.id}`}>
+      <Link href={`/product/${product.id}`}>
         <div className={styles.cardImg}>
-          {props.new && (
-            <NewReleasesIcon fontSize='large' className={styles.newRelease} />
-          )}
-          <img src={props.mainImage.url} alt={props.name} />
+          <Image data={product.mainImage.responsiveImage} />
         </div>
       </Link>
       <div className={styles.cardText}>
-        <p>{props.name}</p>
-        <h4>{props.name}</h4>
+        <p>{product.name}</p>
+        <h4>{product.name}</h4>
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non,
           eligendi.
         </p>
         <div className={styles.cardPrice}>
-          <p>{props.price} kr</p>
+          <p>{product.price} kr</p>
           <div className={styles.btn}>
             <IconButton
               onClick={() => {
-                addToFavorites(props, 1);
+                addToFavorites(product, 1);
               }}>
               <FavoriteBorderIcon />
             </IconButton>
             <IconButton
               onClick={() => {
-                addToCart(props, 1);
+                addToCart(product, 1);
               }}>
               <ShoppingCartOutlinedIcon />
             </IconButton>

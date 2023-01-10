@@ -13,15 +13,13 @@ export default function Product() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  console.log(data);
-
   return (
     <div className={styles.productPage}>
       <Navbar></Navbar>
       <h2>Welcome to the Product page</h2>
       <div className={styles.cards}>
-        {data.allProducts.map((product: any, index: any) => (
-          <Card key={index} {...product} />
+        {data.allProducts.map((product: any, i: any) => (
+          <Card key={i} {...product} />
         ))}
       </div>
       <Footer />

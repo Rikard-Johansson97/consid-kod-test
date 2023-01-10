@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
 const DropMenu = (props: any) => {
   const items = useSelector((state: any) => state[props.data.keyValue]);
+
   console.log(items);
   return (
     <div className={styles.DropMenu}>

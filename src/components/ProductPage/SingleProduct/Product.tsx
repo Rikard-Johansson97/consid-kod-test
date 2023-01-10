@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import styles from "./product.module.scss";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,32 +7,37 @@ import Button from "@mui/material/Button";
 import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
 import useAddToCart from "../../../hooks/addToCart";
 import useQuantityAndTotalPrice from "../../../hooks/useQuantityAndTotalPrice";
+import { Product } from "../../../types/types";
+import { Image } from "react-datocms";
 
-const ProductPage = (props: any) => {
-  const data = props.product;
+const ProductPage = ({ product }: Product) => {
   const { quantity, totalPrice, increment, decrement } =
-    useQuantityAndTotalPrice(props, 1, data.price);
+    useQuantityAndTotalPrice(product, 1, product.price);
   const addToCart = useAddToCart();
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.productPage}>
         <div className={styles.img}>
-          <img src={data.mainImage.url} alt={data.mainImage.alt} />
-          {data.alternativeImages.map((img: any, index: any) => (
-            <div key={index} className={styles.alternative}>
-              <img src={img.url} alt={img.alt}></img>
+          <Image
+            className={styles.mainImg}
+            data={product.mainImage.responsiveImage}></Image>
+          {product.alternativeImages.map((img: any, i: any) => (
+            <div key={i} className={styles.alternative}>
+              <Image
+                data={img.responsiveImage}
+                className={styles.altImg}></Image>
             </div>
           ))}
         </div>
         <div className={styles.productInfo}>
           <div>
-            <h3 className={styles.title}>{data.name}</h3>
-            <p className={styles.category}>{data.name}</p>
+            <h3 className={styles.title}>{product.name}</h3>
+            <p className={styles.category}>{product.name}</p>
             <div className={styles.priceInfo}>
               <div className={styles.price}>
                 <p>Price</p>
-                <span>{data.price} Kr</span>
+                <span>{product.price} Kr</span>
               </div>
               <div className={styles.quantity}>
                 <p>Quantity</p>
@@ -70,7 +74,7 @@ const ProductPage = (props: any) => {
               </div>
               <Button
                 onClick={() => {
-                  addToCart(data, quantity);
+                  addToCart(product, quantity);
                 }}
                 className={styles.addToCart}>
                 <ShoppingCartOutlined className={styles.cartBtn} />

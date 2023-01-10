@@ -1,5 +1,5 @@
 import React from "react";
-import KlarnaPage from "../../../src/components/KlarnaPage/KlarnaPage";
+import KlarnaPage from "../../src/components/KlarnaPage/KlarnaPage";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -14,7 +14,7 @@ const Confirmation = () => {
         "Content-Type": "application/json",
       },
     });
-
+    if (res.status !== 200) return;
     const data = await res.json();
     setResponse(data);
   };
