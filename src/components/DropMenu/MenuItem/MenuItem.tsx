@@ -7,21 +7,27 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import useQuantityAndTotalPrice from "../../../hooks/useQuantityAndTotalPrice";
 import useRemoveFromCart from "../../../hooks/removeFromCart";
-const MenuItem = (props: any) => {
+import { Product } from "../../../types/types";
+import { Image } from "react-datocms";
+
+const MenuItem = (props: Product) => {
+  console.log(props);
+  const { mainImage, name, keyValue, price } = props;
   const { quantity, totalPrice, increment, decrement } =
-    useQuantityAndTotalPrice(props, props.quantity, props.price);
+    useQuantityAndTotalPrice(props, props.quantity, price);
   const removeFromCart = useRemoveFromCart();
+
   return (
     <div className={styles.menuItem}>
       <div className={styles.img}>
-        <img src={props.mainImage.url} alt={props.mainImage.alt} />
+        <Image data={mainImage.responsiveImage} />
       </div>
       <div className={styles.productInfo}>
         <div className={styles.productName}>
-          <h4>{props.name}</h4>
+          <h4>{name}</h4>
           <IconButton
             className={styles.btn}
-            onClick={() => removeFromCart(props, props.keyValue)}>
+            onClick={() => removeFromCart(props, keyValue)}>
             <DeleteOutlineIcon />
           </IconButton>
         </div>

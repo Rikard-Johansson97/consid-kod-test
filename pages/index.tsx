@@ -21,7 +21,6 @@ export default function Home() {
 
   if (productsLoading || homePageLoading) return <p>Loading...</p>;
   if (productsError || homePageError) return <p>Error : Error</p>;
-
   return (
     <>
       <Head>

@@ -38,13 +38,40 @@ const GET_ALL_POSTS = gql`
 const GET_ALL_PRODUCTS = gql`
 query allProducts {
   allProducts {
-    _createdAt
-    name
+    updatedAt
     price
+    name
     id
+    _createdAt
+    alternativeImages {
+      responsiveImage {
+        alt
+        base64
+        bgColor
+        title
+        aspectRatio
+        height
+        sizes
+        src
+        srcSet
+        webpSrcSet
+        width
+      }
+    }
     mainImage {
-      url
-      alt
+      responsiveImage {
+        width
+        webpSrcSet
+        title
+        srcSet
+        src
+        sizes
+        height
+        bgColor
+        base64
+        aspectRatio
+        alt
+      }
     }
   }
 }`
@@ -81,25 +108,31 @@ query getHomePage {
   }
 }
 `
-
-const RESPONSIVE_IMAGE = gql `
-query getResponsiveImage {
-  srcSet
-  webpSrcSet
-  sizes
-  src
-  width
-  height
-  aspectRatio
-  alt
-  title
-  base64
-}`;
 export const GET_PRODUCT = gql `
 query GetProduct ($id: ItemId!) {
-  product (filter: {id: {eq: $id}}) {
-    _createdAt
+  product(filter: {id: {eq: $id}}) {
+    updatedAt
+    price
+    name
     id
+    description {
+      value
+    }
+    alternativeImages {
+      responsiveImage {
+        width
+        webpSrcSet
+        title
+        srcSet
+        src
+        sizes
+        height
+        bgColor
+        base64
+        aspectRatio
+        alt
+      }
+    }
     mainImage {
       responsiveImage {
         width
@@ -114,37 +147,10 @@ query GetProduct ($id: ItemId!) {
         aspectRatio
         alt
       }
-      id
-      url
     }
-    description {
-      blocks
-      links
-      value
-    }
-    alternativeImages {
-      width
-      url
-      responsiveImage {
-        width
-        webpSrcSet
-        title
-        srcSet
-        src
-        sizes
-        height
-        bgColor
-        base64
-        aspectRatio
-        alt
-      }
-      id
-      alt
-    }
-    price
-    name
-    updatedAt
+    _createdAt
   }
-}`
+}
+`
 // Export the defined queries
-export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE,RESPONSIVE_IMAGE};
+export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE};

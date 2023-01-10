@@ -1,6 +1,8 @@
 @import "/src/styles/globals.scss";
 
 .banner {
+  position: relative;
+  top: -64px;
   img {
     height: 100vh;
     width: 100%;
