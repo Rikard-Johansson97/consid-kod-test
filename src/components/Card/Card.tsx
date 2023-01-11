@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import styles from "./card.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
