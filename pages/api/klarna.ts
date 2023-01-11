@@ -101,7 +101,7 @@ const createOrder = async (req : NextApiRequest,res : NextApiResponse) => {
   }
 }
 
-const retrieveOrder = async (req: NextApiRequest, res: NextApiResponse, order_id: string) => {
+const retrieveOrder = async (req: NextApiRequest, res: NextApiResponse, order_id: any) => {
   try {
     console.log();
     const auth = getKlarnaAuth();
