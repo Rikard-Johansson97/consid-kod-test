@@ -9,7 +9,7 @@ import styles from "../../src/styles/checkout.module.scss";
 import Link from "next/link";
 
 const Checkout = () => {
-  const cart = useSelector((state: any) => state.cart);
+  const cart = useSelector((state: any) => state.cart.items);
   const [response, setResponse] = useState<any>(null);
 
   const placeOrder = async (cart: any) => {

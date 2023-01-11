@@ -7,10 +7,9 @@ import MenuItem from "./MenuItem/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
-const DropMenu = (props: any) => {
-  const items = useSelector((state: any) => state[props.data.keyValue]);
 
-  console.log(items);
+const DropMenu = (props: any) => {
+  const items = useSelector((state: any) => state[props.data.keyValue].items);
   return (
     <div className={styles.DropMenu}>
       <div className={styles.header}>

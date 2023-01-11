@@ -24,7 +24,7 @@ const Navbar = () => {
     btn: "Proceed to Checkout",
     keyValue: "cart",
   };
-  const wishListData = { title: "Wishlist", btn: "", keyValue: "favorites" };
+  const wishListData = { title: "Wishlist", btn: "", keyValue: "favorite" };
 
   const links = [
     {

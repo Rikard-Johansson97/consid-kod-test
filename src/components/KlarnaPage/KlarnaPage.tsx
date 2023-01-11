@@ -1,5 +1,5 @@
 import React from "react";
-import { KlarnaHtml } from "../../hooks/KlarnaHtml";
+import { KlarnaHtml } from "../../hooks/useKlarnaHtml";
 import styles from "./klarnaPage.module.scss";
 const KlarnaPage = (props: any) => {
   return (

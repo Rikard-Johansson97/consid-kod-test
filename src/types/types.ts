@@ -1,23 +1,17 @@
-// RESPONSIVE IMAGE
-
-import { StructuredTextPropTypes } from "react-datocms";
-
-interface ResponsiveImage {
-  width: number;
-  webpSrcSet: string;
-  title: any;
-  srcSet: string;
-  src: string;
-  sizes: string;
-  height: number;
-  bgColor: string;
-  base64: string;
-  aspectRatio: number;
-  alt: string;
+import { ResponsiveImageType } from "react-datocms";
+export interface Welcome6 {
+  startpage: Startpage;
 }
 
-// CONTENTS
-interface ContentValue {
+export interface Startpage {
+  __typename: string;
+  title:      string;
+  id:         string;
+  content:    ContentValue;
+  mainImage:  MainImage;
+}
+
+export interface ContentValue {
   schema: string;
   document: {
     type: string;
@@ -31,6 +25,31 @@ interface ContentValue {
   }
 }
 
+export interface Value {
+  schema:   string;
+  document: Document;
+}
+
+export interface Document {
+  type:     string;
+  children: DocumentChild[];
+}
+
+export interface DocumentChild {
+  type:     string;
+  children: ChildChild[];
+}
+
+export interface ChildChild {
+  type:  string;
+  value: string;
+}
+
+export interface MainImage {
+  __typename:      string;
+  responsiveImage: ResponsiveImageType;
+}
+
 //PAGE
 export interface Page {
   title: string;
@@ -39,35 +58,48 @@ export interface Page {
   createdAt: string;
   content: ContentValue
   mainImage: {
-    responsiveImage: ResponsiveImage;
+    responsiveImage: ResponsiveImageType;
   }
 }
 export interface Product {
-  slice: any;
-  product: {  
-    updatedAt: string;
-    price: number;
-    name: string;
-    quantity: number;
-    keyValue: string;
-    mainImage: {
-      responsiveImage: ResponsiveImage;
-    };
-    alternativeImages: {
-      map(arg0: (img: any, index: any) => JSX.Element): import("react").ReactNode;
-      responsiveImage: ResponsiveImage;
-    };
-    _createdAt: string;
-    id: string;
-    description: any;
-    }
-
+  __typename:        string;
+  updatedAt:         Date;
+  price:             number;
+  name:              string;
+  id:                string;
+  description:       Description;
+  alternativeImages: Image[];
+  mainImage:         Image;
+  _createdAt:        Date;
+  quantity: number;
+  keyValue: string;
 }
 
-export interface Data {
-  allProducts: Product[];
-  product: Product[];
+export interface Image {
+  __typename:      string;
+  responsiveImage: ResponsiveImageType;
 }
-interface Response {
-  data: Data;
+export interface Description {
+  __typename: string;
+  value:      Value;
+}
+
+export interface Value {
+  schema:   string;
+  document: Document;
+}
+
+export interface Document {
+  type:     string;
+  children: DocumentChild[];
+}
+
+export interface DocumentChild {
+  type:     string;
+  children: ChildChild[];
+}
+
+export interface ChildChild {
+  type:  string;
+  value: string;
 }
