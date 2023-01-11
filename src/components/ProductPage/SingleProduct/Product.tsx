@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
 import styles from "./product.module.scss";
 import AddIcon from "@mui/icons-material/Add";
@@ -5,15 +6,20 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
-import useAddToCart from "../../../hooks/addToCart";
-import useQuantityAndTotalPrice from "../../../hooks/useQuantityAndTotalPrice";
+import { addToCart, updateQuantity } from "../../../store/reducers";
 import { Product } from "../../../types/types";
-import { Image } from "react-datocms";
+import { Image, StructuredText, StructuredTextPropTypes } from "react-datocms";
+import { useDispatch } from "react-redux";
 
-const ProductPage = ({ product }: Product) => {
-  const { quantity, totalPrice, increment, decrement } =
-    useQuantityAndTotalPrice(product, 1, product.price);
-  const addToCart = useAddToCart();
+interface Props {
+  product: Product;
+}
+
+const ProductPage = (props: Props) => {
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  const { product } = props;
 
   return (
     <div className={styles.wrapper}>
@@ -44,37 +50,33 @@ const ProductPage = ({ product }: Product) => {
                 <div className={styles.quantityBtn}>
                   <IconButton
                     className={styles.btn}
-                    onClick={() => decrement()}>
+                    onClick={() => quantity > 1 && setQuantity(quantity - 1)}>
                     <RemoveIcon />
                   </IconButton>
                   <span>{quantity}</span>
                   <IconButton
                     className={styles.btn}
-                    onClick={() => increment()}>
+                    onClick={() => setQuantity(quantity + 1)}>
+                    {" "}
                     <AddIcon />
                   </IconButton>
                 </div>
               </div>
             </div>
             <div className={styles.description}>
-              <Button className={styles.btn}>Description</Button>
-              <Button className={styles.btn}>Details</Button>
+              <p>Description</p>
             </div>
-            <p className={styles.productDetails}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-              omnis eum maiores incidunt quod ipsam fugit ducimus eveniet!
-              Officia, harum.
-            </p>
+            <StructuredText data={product.description} />
           </div>
           <div>
             <div className={styles.buyInfo}>
               <div className={styles.totalPrice}>
                 <p>Total Price</p>
-                <span>{totalPrice} Kr</span>
+                <span>{product.quantity * product.price} Kr</span>
               </div>
               <Button
                 onClick={() => {
-                  addToCart(product, quantity);
+                  dispatch(addToCart({ product: product, quantity: quantity }));
                 }}
                 className={styles.addToCart}>
                 <ShoppingCartOutlined className={styles.cartBtn} />

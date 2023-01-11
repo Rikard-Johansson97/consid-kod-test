@@ -14,6 +14,7 @@ export default function Document() {
           html {
             background-color: #e4e5f1;
           }
+          
         `}</style>
       </body>
     </Html>

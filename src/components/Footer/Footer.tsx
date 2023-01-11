@@ -10,8 +10,6 @@ const links = [
   { name: "Contact", href: "/contact" },
 ];
 
-//TODO: CSS PROBLEM, footer är inte längst ner (responsiv)
-
 const Footer = () => (
   <footer className={styles.footer}>
     <Link href='/' className={styles.logo}>

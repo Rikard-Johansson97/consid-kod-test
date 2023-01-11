@@ -5,16 +5,18 @@ import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import useQuantityAndTotalPrice from "../../../hooks/useQuantityAndTotalPrice";
-import useRemoveFromCart from "../../../hooks/removeFromCart";
-import { Product } from "../../../types/types";
 import { Image } from "react-datocms";
+import {
+  removeFromCart,
+  updateQuantity,
+  removeFromFavorite,
+} from "../../../store/reducers";
+import { useDispatch } from "react-redux";
+import { Product } from "../../../types/types";
 
-const MenuItem = (props: any) => {
-  const { mainImage, name, keyValue, price } = props;
-  const { quantity, totalPrice, increment, decrement } =
-    useQuantityAndTotalPrice(props, props.quantity, price);
-  const removeFromCart = useRemoveFromCart();
+const MenuItem = (props: Product) => {
+  const dispatch = useDispatch();
+  const { mainImage, name, keyValue, price, quantity } = props;
 
   return (
     <div className={styles.menuItem}>
@@ -24,23 +26,40 @@ const MenuItem = (props: any) => {
       <div className={styles.productInfo}>
         <div className={styles.productName}>
           <h4>{name}</h4>
-          <IconButton
-            className={styles.btn}
-            onClick={() => removeFromCart(props, keyValue)}>
-            <DeleteOutlineIcon />
-          </IconButton>
+          {keyValue === "cart" ? (
+            <IconButton
+              className={styles.btn}
+              onClick={() => dispatch(removeFromCart(props))}>
+              <DeleteOutlineIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              className={styles.btn}
+              onClick={() => dispatch(removeFromFavorite(props))}>
+              <DeleteOutlineIcon />
+            </IconButton>
+          )}
         </div>
         <div className={styles.buyInfo}>
           <div className={styles.quantityBtn}>
-            <IconButton className={styles.btn} onClick={() => decrement()}>
+            <IconButton
+              className={styles.btn}
+              onClick={() =>
+                quantity > 1 &&
+                dispatch(updateQuantity({ productId: props.id, quantity: -1 }))
+              }>
               <RemoveIcon />
             </IconButton>
             <span>{quantity}</span>
-            <IconButton className={styles.btn} onClick={() => increment()}>
+            <IconButton
+              className={styles.btn}
+              onClick={() =>
+                dispatch(updateQuantity({ productId: props.id, quantity: 1 }))
+              }>
               <AddIcon />
             </IconButton>
           </div>
-          <p className={styles.price}>{totalPrice} Kr</p>
+          <p className={styles.price}>{quantity * price} Kr</p>
         </div>
       </div>
     </div>

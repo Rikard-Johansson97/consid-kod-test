@@ -2,7 +2,6 @@ import Banner from "../src/components/Banner/Banner";
 import Head from "next/head";
 import { useQuery } from "@apollo/client";
 import {
-  GET_ALL_PRODUCTS,
   GET_HOME_PAGE,
   GET_FEATURED_PRODUCT_IDS,
 } from "../src/graphql/queries";
@@ -13,7 +12,6 @@ import { StructuredText } from "react-datocms";
 import CardWrapper from "../src/components/CardWrapper/CardWrapper";
 
 export default function Home() {
-  // Convert below to Redux, when data is fetched, store it in the redux store so you don't have to fetch it again
   const {
     loading: productsLoading,
     error: productsError,
@@ -27,6 +25,7 @@ export default function Home() {
 
   if (productsLoading || homePageLoading) return <p>Loading...</p>;
   if (productsError || homePageError) return <p>Error : Error</p>;
+
   return (
     <>
       <Head>
@@ -36,19 +35,13 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div>
-        {/* DONE */}
         <Navbar />
-        {/* DONE */}
         <Banner {...homePage.startpage} />
-        {/* DONE */}
         <NewProducts ids={products.allProducts} />
-        {/* DONE */}
         <CardWrapper>
           <StructuredText data={homePage.startpage.content.value} />
         </CardWrapper>
-        {/* DONE */}
         <Footer />
-        {/* DONE */}
       </div>
     </>
   );

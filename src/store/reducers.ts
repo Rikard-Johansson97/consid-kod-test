@@ -1,61 +1,98 @@
 import { combineReducers } from "redux";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+interface items {
+  items: any;
+}
 
-// Define the `cartReducer` function to update the state of the cart in response to actions
-const cartReducer = (state = [], action : any) => {
-  switch (action.type) {
-    case "ADD_TO_CART":
-      // Add the product to the cart and return the updated state
-      return [...state, action.product];
-    case "REMOVE_FROM_CART":
-      // Remove the product from the cart and return the updated state
-      return state.filter((product : any) => product.id !== action.product.id);
-    case "UPDATE_CART_PRODUCT_QUANTITY":
-      // Update the quantity of the product in the cart and return the updated state
-      return state.map((product : any) => {
-        if (product.id === action.productId) {
-          return {
-            ...product,
-            quantity: action.quantity,
-          };
-        }
-        return product;
-      });
-    case "CREATE_ORDER":
-      // Add the order to the cart and return the updated state
-      return [...state, action.payload];
-    default:
-      // Return the current state if no action is specified
-      return state;
-  }
+
+const initialState: items = {
+  items: [],
 };
 
-// Define the `favoritesReducer` function to update the state of the favorites in response to actions
-const favoritesReducer = (state = [], action : any) => {
-  switch (action.type) {
-    case "ADD_TO_FAVORITES":
-      // Add the product to the favorites and return the updated state
-      return [...state, action.product];
-    case "REMOVE_FROM_FAVORITES":
-      // Remove the product from the favorites and return the updated state
-      return state.filter((product : any) => product.id !== action.product.id);
-    case "UPDATE_FAVORITES_PRODUCT_QUANTITY":
-      // Update the quantity of the product in the favorites and return the updated state
-      return state.map((product : any) => {
-        if (product.id === action.productId) {
-          return {
-            ...product,
-            quantity: action.quantity,
-          };
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (
+      state,
+      action: PayloadAction<{ product: any; quantity: number }>
+    ) => {
+      const { product, quantity } = action.payload;
+      const existingItem = state.items.find(
+        (item: any) => item.id === product.id
+      );
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        state.items.push({ ...product, quantity });
+      }
+    },
+
+    removeFromCart: (state, action: PayloadAction<any>) => {
+      const { id } = action.payload;
+      state.items = state.items.filter((item: any) => item.id !== id);
+    },
+    updateQuantity: (
+      state,
+      action: PayloadAction<{ productId: string; quantity: number }>
+    ) => {
+      const { productId, quantity } = action.payload;
+      state.items = state.items.map((item: any) => {
+        if (item.id === productId) {
+          item.quantity += quantity;
         }
-        return product;
+        return item;
       });
-    default:
-      // Return the current state if no action is specified
-      return state;
-  }
-};
+    },
+  },
+});
+
+// Action creators are generated for each case reducer function
+export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions;
+
+const favoriteSlice = createSlice({
+  name: "favorite",
+  initialState,
+  reducers: {
+    addToFavorite: (
+      state,
+      action: PayloadAction<{ product: any; quantity: number }>
+    ) => {
+      const { product, quantity } = action.payload;
+      const existingItem = state.items.find(
+        (item: any) => item.id === product.id
+      );
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        state.items.push({ ...product, quantity });
+      }
+    },
+
+    removeFromFavorite: (state, action: PayloadAction<any>) => {
+      const { id } = action.payload;
+      state.items = state.items.filter((item: any) => item.id !== id);
+    },
+    updateFavoriteQuantity: (
+      state,
+      action: PayloadAction<{ productId: string; quantity: number }>
+    ) => {
+      const { productId, quantity } = action.payload;
+      state.items = state.items.map((item: any) => {
+        if (item.id === productId) {
+          item.quantity += quantity;
+        }
+        return item;
+      });
+    },
+  },
+});
+
+export const { addToFavorite, removeFromFavorite, updateFavoriteQuantity } = favoriteSlice.actions;
+
 
 export default combineReducers({
-  cart: cartReducer,
-  favorites: favoritesReducer,
+  cart: cartSlice.reducer,
+  favorite: favoriteSlice.reducer,
 });

@@ -1,20 +1,20 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import styles from "./card.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
-import useAddToCart from "../../hooks/addToCart";
-import useAddToFavorites from "../../hooks/addToFavorites";
 import { Image } from "react-datocms";
 import { useQuery } from "@apollo/client";
-import { Product } from "../../types/types";
 import { GET_PRODUCT } from "../../graphql/queries";
+import { addToCart, addToFavorite } from "../../store/reducers";
+import { useDispatch } from "react-redux";
+import { Product } from "../../types/types";
 
 const Card = ({ id }: Product) => {
+  const dispatch = useDispatch();
 
-  const addToCart = useAddToCart();
-  const addToFavorites = useAddToFavorites();
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
   if (loading) return <p>Loading...</p>;
@@ -41,13 +41,13 @@ const Card = ({ id }: Product) => {
           <div className={styles.btn}>
             <IconButton
               onClick={() => {
-                addToFavorites(product, 1);
+                dispatch(addToFavorite({ product: product, quantity: 1 }));
               }}>
               <FavoriteBorderIcon />
             </IconButton>
             <IconButton
               onClick={() => {
-                addToCart(product, 1);
+                dispatch(addToCart({ product: product, quantity: 1 }));
               }}>
               <ShoppingCartOutlinedIcon />
             </IconButton>

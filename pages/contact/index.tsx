@@ -1,12 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_POSTS } from "../../src/graphql/queries";
+import { GET_PAGE_CONTENT } from "../../src/graphql/queries";
 import Navbar from "../../src/components/Navbar/Navbar";
 import Banner from "../../src/components/Banner/Banner";
 import CardWrapper from "../../src/components/CardWrapper/CardWrapper";
+import { StructuredText } from "react-datocms";
 const Contact = () => {
-  const { loading, error, data } = useQuery(GET_ALL_POSTS);
+  const { loading, error, data } = useQuery(GET_PAGE_CONTENT, {
+    variables: { slug: "contact" },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -14,20 +16,9 @@ const Contact = () => {
   return (
     <div>
       <Navbar />
-      <Banner {...data.allPages[1]} />
+      <Banner {...data.page} />
       <CardWrapper>
-        <form>
-          <label htmlFor='name'>Name:</label>
-          <input type='text' id='name' />
-          <br />
-          <label htmlFor='email'>Email:</label>
-          <input type='email' id='email' />
-          <br />
-          <label htmlFor='message'>Message:</label>
-          <textarea id='message'></textarea>
-          <br />
-          <button type='submit'>Send</button>
-        </form>
+        <StructuredText data={data.page.content} />
       </CardWrapper>
     </div>
   );
