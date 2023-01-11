@@ -9,8 +9,9 @@ import { useQuery } from "@apollo/client";
 import { GET_PRODUCT } from "../../graphql/queries";
 import { addToCart, addToFavorite } from "../../store/reducers";
 import { useDispatch } from "react-redux";
+import { Product } from "../../types/types";
 
-const Card = ({ id }: any) => {
+const Card = ({ id }: Product) => {
   const dispatch = useDispatch();
 
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });

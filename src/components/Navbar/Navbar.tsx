@@ -10,15 +10,15 @@ import DropMenu from "../DropMenu/DropMenu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [menuData, setMenuData] = useState(null);
+  const [menuData, setMenuData] = useState();
   const [showDropMenu, setShowDropMenu] = useState(false);
 
   const toggleDropMenu = (data: any, state: boolean) => {
     setMenuData(data);
+    console.log(JSON.stringify(data));
     setShowDropMenu(state);
   };
 
-  // TODO DUMMY DATA FIX LATER
   const cartData = {
     title: "Cart",
     btn: "Proceed to Checkout",

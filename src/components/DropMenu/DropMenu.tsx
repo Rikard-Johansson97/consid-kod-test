@@ -7,9 +7,13 @@ import MenuItem from "./MenuItem/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
+import { Product } from "../../types/types";
 
 const DropMenu = (props: any) => {
   const items = useSelector((state: any) => state[props.data.keyValue].items);
+
+  console.log(items);
+
   return (
     <div className={styles.DropMenu}>
       <div className={styles.header}>
