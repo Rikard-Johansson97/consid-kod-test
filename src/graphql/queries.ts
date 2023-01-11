@@ -1,37 +1,34 @@
 import { gql } from '@apollo/client';
 
 // Define a GraphQL query to retrieve all posts
-const GET_ALL_POSTS = gql`
-  query GetAllPosts {
-    allPages {
-      title
-      id
-      slug
-      mainImage {
-        url
+const GET_PAGE_CONTENT = gql`
+    query GET_PAGE_CONTENT ($slug: String!) {
+      page(filter: {slug: {eq: $slug}}) {
+        id
         title
-        responsiveImage {
-          width
-          webpSrcSet
-          title
-          srcSet
-          src
-          sizes
-          height
-          bgColor
-          base64
-          aspectRatio
-          alt
+        slug
+        content {
+          value
+          links
+          blocks
+        }
+        mainImage {
+          responsiveImage {
+            alt
+            base64
+            bgColor
+            title
+            webpSrcSet
+            srcSet
+            src
+            sizes
+            height
+            width
+            aspectRatio
+          }
         }
       }
-      content {
-        blocks
-        links
-        value
       }
-      _createdAt
-    }
-  }
 `;
 
 // Define a GraphQL query to retrieve all products
@@ -57,6 +54,9 @@ query allProducts {
         webpSrcSet
         width
       }
+    }
+    description {
+      value
     }
     mainImage {
       responsiveImage {
@@ -135,6 +135,9 @@ query GetProduct ($id: ItemId!) {
         alt
       }
     }
+    description {
+      value
+    }
     mainImage {
       responsiveImage {
         width
@@ -155,5 +158,5 @@ query GetProduct ($id: ItemId!) {
 }
 `
 // Export the defined queries
-export {GET_ALL_POSTS, GET_ALL_PRODUCTS, GET_HOME_PAGE, GET_FEATURED_PRODUCT_IDS};
+export {GET_PAGE_CONTENT, GET_ALL_PRODUCTS, GET_HOME_PAGE, GET_FEATURED_PRODUCT_IDS};
 

@@ -48,7 +48,7 @@ function formatProduct(product : any) {
 	};
 }
 
-const createOrder = async (req : any,res : any) => {
+const createOrder = async (req : NextApiRequest,res : NextApiResponse) => {
   try {
     if (req.method !== "POST") return res.status(404); 
   const cart = req.body.cart;
@@ -101,7 +101,7 @@ const createOrder = async (req : any,res : any) => {
   }
 }
 
-const retrieveOrder = async (req: any, res: any, order_id: any) => {
+const retrieveOrder = async (req: NextApiRequest, res: NextApiResponse, order_id: string) => {
   try {
     console.log();
     const auth = getKlarnaAuth();

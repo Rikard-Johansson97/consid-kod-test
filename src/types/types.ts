@@ -1,5 +1,7 @@
 // RESPONSIVE IMAGE
 
+import { StructuredTextPropTypes } from "react-datocms";
+
 interface ResponsiveImage {
   width: number;
   webpSrcSet: string;
@@ -41,6 +43,7 @@ export interface Page {
   }
 }
 export interface Product {
+  slice: any;
   product: {  
     updatedAt: string;
     price: number;
@@ -56,9 +59,8 @@ export interface Product {
     };
     _createdAt: string;
     id: string;
-    description: {
-      value: ContentValue;
-    };}
+    description: any;
+    }
 
 }
 

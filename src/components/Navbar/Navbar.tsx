@@ -37,6 +37,11 @@ const Navbar = () => {
       title: "Products",
       url: "/product",
     },
+    {
+      id: 3,
+      title: "Checkout",
+      url: "/checkout",
+    },
   ];
 
   return (

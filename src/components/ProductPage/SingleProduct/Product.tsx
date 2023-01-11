@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
 import styles from "./product.module.scss";
 import AddIcon from "@mui/icons-material/Add";
@@ -5,15 +6,17 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
-import useAddToCart from "../../../hooks/addToCart";
+import useAddToCart from "../../../hooks/useAddToCart";
 import useQuantityAndTotalPrice from "../../../hooks/useQuantityAndTotalPrice";
 import { Product } from "../../../types/types";
-import { Image } from "react-datocms";
+import { Image, StructuredText, StructuredTextPropTypes } from "react-datocms";
 
 const ProductPage = ({ product }: Product) => {
   const { quantity, totalPrice, increment, decrement } =
     useQuantityAndTotalPrice(product, 1, product.price);
   const addToCart = useAddToCart();
+
+  console.log(product);
 
   return (
     <div className={styles.wrapper}>
@@ -57,14 +60,9 @@ const ProductPage = ({ product }: Product) => {
               </div>
             </div>
             <div className={styles.description}>
-              <Button className={styles.btn}>Description</Button>
-              <Button className={styles.btn}>Details</Button>
+              <p>Description</p>
             </div>
-            <p className={styles.productDetails}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-              omnis eum maiores incidunt quod ipsam fugit ducimus eveniet!
-              Officia, harum.
-            </p>
+            <StructuredText data={product.description} />
           </div>
           <div>
             <div className={styles.buyInfo}>
