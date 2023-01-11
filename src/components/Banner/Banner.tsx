@@ -2,7 +2,7 @@ import { Image } from "react-datocms";
 import React from "react";
 import styles from "./banner.module.scss";
 import { ResponsiveImageType } from "react-datocms";
-import { Product } from "../../types/types";
+
 type Props = {
   mainImage: {
     responsiveImage: ResponsiveImageType;

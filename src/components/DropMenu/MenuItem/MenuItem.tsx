@@ -12,8 +12,9 @@ import {
   removeFromFavorite,
 } from "../../../store/reducers";
 import { useDispatch } from "react-redux";
+import { Product } from "../../../types/types";
 
-const MenuItem = (props: any) => {
+const MenuItem = (props: Product) => {
   const dispatch = useDispatch();
   const { mainImage, name, keyValue, price, quantity } = props;
 
