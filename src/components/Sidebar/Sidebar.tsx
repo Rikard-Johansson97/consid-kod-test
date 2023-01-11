@@ -2,6 +2,11 @@ import React, { useEffect } from "react";
 import styles from "./sidebar.module.scss";
 import IconButton from "@mui/material/IconButton";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
 import Link from "next/link";
 
 const Sidebar = (props: any) => {
@@ -14,10 +19,31 @@ const Sidebar = (props: any) => {
   }, []);
 
   const links = [
-    { name: "Home", href: "/" },
-    { name: "Products", href: "/product" },
-    { name: "About", href: "/about" },
-    { name: "Contact us", href: "/contact" },
+    {
+      name: "Home",
+      href: "/",
+      icon: <CottageOutlinedIcon fontSize='large' />,
+    },
+    {
+      name: "Products",
+      href: "/product",
+      icon: <ShoppingBagOutlinedIcon fontSize='large' />,
+    },
+    {
+      name: "About",
+      href: "/about",
+      icon: <InfoOutlinedIcon fontSize='large' />,
+    },
+    {
+      name: "Contact us",
+      href: "/contact",
+      icon: <AlternateEmailOutlinedIcon fontSize='large' />,
+    },
+    {
+      name: "Checkout",
+      href: "/checkout",
+      icon: <ShoppingCartCheckoutOutlinedIcon fontSize='large' />,
+    },
   ];
 
   return (
@@ -36,6 +62,7 @@ const Sidebar = (props: any) => {
             <li key={link.name}>
               <Link href={link.href} className={styles.link}>
                 {link.name}
+                <IconButton className={styles.btnIcon}>{link.icon}</IconButton>
               </Link>
             </li>
           ))}
