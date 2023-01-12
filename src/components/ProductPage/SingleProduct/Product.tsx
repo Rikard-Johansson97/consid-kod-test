@@ -72,7 +72,7 @@ const ProductPage = (props: Props) => {
             <div className={styles.buyInfo}>
               <div className={styles.totalPrice}>
                 <p>Total Price</p>
-                <span>{product.quantity * product.price} Kr</span>
+                <span>{quantity * product.price} Kr</span>
               </div>
               <Button
                 onClick={() => {
