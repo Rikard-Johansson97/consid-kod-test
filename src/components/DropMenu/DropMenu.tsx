@@ -9,35 +9,35 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
 import { Product } from "../../types/types";
 
-const DropMenu = (props: any) => {
-  const items = useSelector((state: any) => state[props.data.keyValue].items);
-
-  console.log(items);
+const DropMenu = ({ menuData, toggleDropMenu }: any) => {
+  const items = useSelector(
+    (state: any) => state[menuData.data.keyValue].items
+  );
 
   return (
     <div className={styles.DropMenu}>
       <div className={styles.header}>
         <p className={styles.title}>
-          {props.data.title}
+          {items.title}
           <span> ({items.length})</span>
         </p>
         <Link href='/checkout' className={styles.viewAll}>
           View All
         </Link>
         <div className={styles.closeMenu}>
-          <IconButton onClick={() => props.toggleDropMenu(false)}>
+          <IconButton onClick={() => toggleDropMenu(false)}>
             <CloseIcon fontSize='large' />
           </IconButton>
         </div>
       </div>
       <div className={styles.cartItems}>
         {items
-          ? items.map((item: any, index: any) => (
-              <MenuItem key={index} {...item} {...props.data} />
+          ? items.map((item: Product, i: number) => (
+              <MenuItem key={i} {...item} {...menuData} />
             ))
           : null}
       </div>
-      {props.data.btn && (
+      {menuData.data.btn && (
         <Link href='/checkout'>
           <Button className={styles.addToCart}>
             <ShoppingCartOutlined className={styles.cartBtn} />

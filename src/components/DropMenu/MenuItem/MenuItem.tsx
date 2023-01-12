@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "./menuItem.module.scss";
@@ -16,7 +17,7 @@ import { Product } from "../../../types/types";
 
 const MenuItem = (props: Product) => {
   const dispatch = useDispatch();
-  const { mainImage, name, keyValue, price, quantity } = props;
+  const { mainImage, name, keyValue, price, quantity, data } = props;
 
   return (
     <div className={styles.menuItem}>
@@ -26,7 +27,7 @@ const MenuItem = (props: Product) => {
       <div className={styles.productInfo}>
         <div className={styles.productName}>
           <h4>{name}</h4>
-          {keyValue === "cart" ? (
+          {data.keyValue === "cart" ? (
             <IconButton
               className={styles.btn}
               onClick={() => dispatch(removeFromCart(props))}>

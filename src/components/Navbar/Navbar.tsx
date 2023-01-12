@@ -7,26 +7,35 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Sidebar from "../Sidebar/Sidebar";
 import DropMenu from "../DropMenu/DropMenu";
+import { LinkType, MenuData } from "../../types/types";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [menuData, setMenuData] = useState();
+  const [menuData, setMenuData] = useState<Partial<MenuData>>({});
   const [showDropMenu, setShowDropMenu] = useState(false);
 
-  const toggleDropMenu = (data: any, state: boolean) => {
+  const toggleDropMenu = (data: MenuData, state: boolean) => {
     setMenuData(data);
-    console.log(JSON.stringify(data));
     setShowDropMenu(state);
   };
 
-  const cartData = {
-    title: "Cart",
-    btn: "Proceed to Checkout",
-    keyValue: "cart",
+  const cartData: MenuData = {
+    data: {
+      title: "Cart",
+      btn: "Add to Cart",
+      keyValue: "cart",
+    },
   };
-  const wishListData = { title: "Wishlist", btn: "", keyValue: "favorite" };
 
-  const links = [
+  const wishListData: MenuData = {
+    data: {
+      title: "Wishlist",
+      btn: "",
+      keyValue: "favorite",
+    },
+  };
+
+  const links: LinkType[] = [
     {
       id: 1,
       title: "Home",
@@ -74,7 +83,7 @@ const Navbar = () => {
         </IconButton>
       </div>
       {showDropMenu && (
-        <DropMenu data={menuData} toggleDropMenu={toggleDropMenu} />
+        <DropMenu menuData={menuData} toggleDropMenu={toggleDropMenu} />
       )}
     </nav>
   );

@@ -37,7 +37,7 @@ export default function Home() {
       <div>
         <Navbar />
         <Banner {...homePage.startpage} />
-        <NewProducts ids={products.allProducts} />
+        <NewProducts allProducts={products.allProducts} />
         <CardWrapper>
           <StructuredText data={homePage.startpage.content.value} />
         </CardWrapper>

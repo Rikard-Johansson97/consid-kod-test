@@ -1,10 +1,16 @@
 import React from "react";
 import { KlarnaHtml } from "../../hooks/useKlarnaHtml";
-import { Page } from "../../types/types";
 import styles from "./klarnaPage.module.scss";
-const KlarnaPage = (props: any) => {
-  console.log(JSON.stringify(props.snippet));
+interface KlarnaSnippet {
+  snippet: {
+    id: string;
+    style: string;
+    content: string;
+    reloadCheckoutHandler: () => void;
+  };
+}
 
+const KlarnaPage = (props: KlarnaSnippet) => {
   return (
     <div className={styles.klarnaPage}>
       <iframe

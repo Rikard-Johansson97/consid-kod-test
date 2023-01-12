@@ -7,12 +7,13 @@ import KlarnaPage from "../../src/components/KlarnaPage/KlarnaPage";
 import { Button } from "@mui/material";
 import styles from "../../src/styles/checkout.module.scss";
 import Link from "next/link";
+import { Product } from "../../src/types/types";
 
 const Checkout = () => {
   const cart = useSelector((state: any) => state.cart.items);
   const [response, setResponse] = useState<any>(null);
 
-  const placeOrder = async (cart: any) => {
+  const placeOrder = async (cart: Product) => {
     const res = await fetch("/api/klarna", {
       method: "POST",
       headers: {

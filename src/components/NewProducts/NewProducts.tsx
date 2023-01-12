@@ -2,28 +2,21 @@ import React from "react";
 import Card from "../Card/Card";
 import styles from "./newProducts.module.scss";
 import CardWrapper from "../CardWrapper/CardWrapper";
-import { Data, Product } from "../../types/types";
+import { Product } from "../../types/types";
 
 type Props = {
-  ids: String[];
+  allProducts: Product[];
 };
 
-const NewProducts = ({ ids }: Props) => {
-  console.log("ids", ids);
-
+const NewProducts = ({ allProducts }: Props) => {
   return (
     <CardWrapper>
       <div className={styles.newProducts}>
         <h3>NEW</h3>
         <div className={styles.cards}>
-          {ids.map(
-            (
-              { id }: any,
-              i: number //TODO: Fix types, Matheus?
-            ) => (
-              <Card key={i} id={id} />
-            )
-          )}
+          {allProducts.slice(0, 3).map((product, i) => (
+            <Card key={i} {...product} />
+          ))}
         </div>
       </div>
     </CardWrapper>

@@ -5,9 +5,9 @@ import Navbar from "../../src/components/Navbar/Navbar";
 import { GET_ALL_PRODUCTS } from "../../src/graphql/queries";
 import Footer from "../../src/components/Footer/Footer";
 import styles from "../../src/components/ProductPage/productPage.module.scss";
+import { Product } from "../../src/types/types";
 
 export default function Product() {
-  const router = useRouter();
   const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
 
   if (loading) return <p>Loading...</p>;
@@ -20,7 +20,7 @@ export default function Product() {
       <Navbar></Navbar>
       <h2>Welcome to the Product page</h2>
       <div className={styles.cards}>
-        {data.allProducts.map((product: any, i: any) => (
+        {data.allProducts.map((product: Product, i: number) => (
           <Card key={i} {...product} />
         ))}
       </div>

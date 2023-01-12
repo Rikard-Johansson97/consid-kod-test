@@ -1,14 +1,12 @@
 import { ResponsiveImageType } from "react-datocms";
-export interface Welcome6 {
-  startpage: Startpage;
-}
-
 export interface Startpage {
-  __typename: string;
-  title:      string;
-  id:         string;
-  content:    ContentValue;
-  mainImage:  MainImage;
+  startpage: {
+    __typename: string;
+    title: string;
+    id: string;
+    content: ContentValue;
+    mainImage: MainImage;
+  };
 }
 
 export interface ContentValue {
@@ -20,33 +18,13 @@ export interface ContentValue {
       children: {
         type: string;
         value: string;
-      }[]
+      }[];
     }[];
-  }
-}
-
-export interface Value {
-  schema:   string;
-  document: Document;
-}
-
-export interface Document {
-  type:     string;
-  children: DocumentChild[];
-}
-
-export interface DocumentChild {
-  type:     string;
-  children: ChildChild[];
-}
-
-export interface ChildChild {
-  type:  string;
-  value: string;
+  };
 }
 
 export interface MainImage {
-  __typename:      string;
+  __typename: string;
   responsiveImage: ResponsiveImageType;
 }
 
@@ -56,50 +34,44 @@ export interface Page {
   updatedAt: string;
   id: string;
   createdAt: string;
-  content: ContentValue
-  mainImage: {
-    responsiveImage: ResponsiveImageType;
-  }
+  content: ContentValue;
+  mainImage: MainImage;
 }
 export interface Product {
-  __typename:        string;
-  updatedAt:         Date;
-  price:             number;
-  name:              string;
-  id:                string;
-  description:       Description;
-  alternativeImages: Image[];
-  mainImage:         Image;
-  _createdAt:        Date;
+  __typename: string;
+  updatedAt: Date;
+  price: number;
+  name: string;
+  id: string;
+  description: Description;
+  alternativeImages: MainImage;
+  mainImage: MainImage;
+  _createdAt: Date;
   quantity: number;
   keyValue: string;
+  ids: any[]
+  data: {
+      title: string;
+      btn: string;
+      keyValue: string; 
+  }
 }
 
-export interface Image {
-  __typename:      string;
-  responsiveImage: ResponsiveImageType;
-}
 export interface Description {
   __typename: string;
-  value:      Value;
+  value: ContentValue;
+}
+export interface MenuData {
+  data: {
+    title: string;
+    btn: string;
+    keyValue: string;
+  };
 }
 
-export interface Value {
-  schema:   string;
-  document: Document;
-}
-
-export interface Document {
-  type:     string;
-  children: DocumentChild[];
-}
-
-export interface DocumentChild {
-  type:     string;
-  children: ChildChild[];
-}
-
-export interface ChildChild {
-  type:  string;
-  value: string;
+export interface LinkType {
+  id?: number;
+  title: string;
+  url: string;
+  icon?: JSX.Element | null;
 }

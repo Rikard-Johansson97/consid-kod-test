@@ -8,6 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
 import Link from "next/link";
+import { LinkType } from "../../types/types";
 
 const Sidebar = (props: any) => {
   const { isOpen, setIsOpen } = props;
@@ -16,32 +17,32 @@ const Sidebar = (props: any) => {
     const handleScroll = () => setIsOpen(false);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [setIsOpen]);
 
-  const links = [
+  const links: LinkType[] = [
     {
-      name: "Home",
-      href: "/",
+      title: "Home",
+      url: "/",
       icon: <CottageOutlinedIcon fontSize='large' />,
     },
     {
-      name: "Products",
-      href: "/product",
+      title: "Products",
+      url: "/product",
       icon: <ShoppingBagOutlinedIcon fontSize='large' />,
     },
     {
-      name: "About",
-      href: "/about",
+      title: "About",
+      url: "/about",
       icon: <InfoOutlinedIcon fontSize='large' />,
     },
     {
-      name: "Contact us",
-      href: "/contact",
+      title: "Contact us",
+      url: "/contact",
       icon: <AlternateEmailOutlinedIcon fontSize='large' />,
     },
     {
-      name: "Checkout",
-      href: "/checkout",
+      title: "Checkout",
+      url: "/checkout",
       icon: <ShoppingCartCheckoutOutlinedIcon fontSize='large' />,
     },
   ];
@@ -59,9 +60,9 @@ const Sidebar = (props: any) => {
         </IconButton>
         <ul className={styles.links}>
           {links.map((link) => (
-            <li key={link.name}>
-              <Link href={link.href} className={styles.link}>
-                {link.name}
+            <li key={link.title}>
+              <Link href={link.url} className={styles.link}>
+                {link.title}
                 <IconButton className={styles.btnIcon}>{link.icon}</IconButton>
               </Link>
             </li>
