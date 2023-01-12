@@ -1,5 +1,4 @@
 import "../src/styles/globals.scss";
-import "../src/styles/utilities/reset.css";
 import type { AppProps } from "next/app";
 
 import { Provider } from "react-redux";
@@ -9,10 +8,12 @@ import { client } from "../src/apollo/client";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    </ApolloProvider>
+    <div className='root'>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </ApolloProvider>
+    </div>
   );
 }
