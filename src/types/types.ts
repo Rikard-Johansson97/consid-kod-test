@@ -4,7 +4,7 @@ export interface Startpage {
     __typename: string;
     title: string;
     id: string;
-    content: ContentValue;
+    content: StructuredTextDocument;
     mainImage: MainImage;
   };
 }
