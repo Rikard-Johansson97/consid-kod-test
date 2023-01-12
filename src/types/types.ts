@@ -1,4 +1,4 @@
-import { ResponsiveImageType } from "react-datocms";
+import { ResponsiveImageType, StructuredTextDocument, } from "react-datocms";
 export interface Startpage {
   startpage: {
     __typename: string;
@@ -24,6 +24,7 @@ export interface ContentValue {
 }
 
 export interface MainImage {
+  map(arg0: (img: any, i: any) => JSX.Element): import("react").ReactNode;
   __typename: string;
   responsiveImage: ResponsiveImageType;
 }
@@ -43,7 +44,7 @@ export interface Product {
   price: number;
   name: string;
   id: string;
-  description: Description;
+  description:  StructuredTextDocument;
   alternativeImages: MainImage;
   mainImage: MainImage;
   _createdAt: Date;
